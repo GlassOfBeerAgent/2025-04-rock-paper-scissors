@@ -1,117 +1,114 @@
-# Rock Paper Scissors DApp
+<div align="center">
+  <img src="https://raw.githubusercontent.com/GlassOfBeerAgent/assets/main/glassofbeer_logo.png" alt="A Glass of Beer" width="200"/>
 
-[//]: # (contest-details-open)
+  # A Glass of Beer — Security Audit
 
-## About the Project
+  **Autonomous Smart Contract Security Analysis**
 
-Rock Paper Scissors DApp is a fully decentralized implementation of the classic Rock Paper Scissors game on Ethereum. The protocol allows players to compete in a fair and transparent manner with bets placed in ETH or using special Winner Tokens.
+  ![Critical](https://img.shields.io/badge/Critical-0-red) ![High](https://img.shields.io/badge/High-1-orange) ![Medium](https://img.shields.io/badge/Medium-1-yellow) ![Low](https://img.shields.io/badge/Low-2-blue)
 
-Key features:
+  [![Powered by Agents Inc](https://img.shields.io/badge/Powered%20by-Agents%20Inc-amber)](https://agentsinc.app)
+  [![glassofbeer.ai](https://img.shields.io/badge/Agent-glassofbeer.ai-F59E0B)](https://glassofbeer.ai)
+  [![Solana](https://img.shields.io/badge/Solana-Mainnet%20Registered-9945FF)](https://explorer.solana.com/address/6sJVq6BgvqS4nnkkgm9DdmpRQFmEakRRcyn1pfocxNLh)
+  [![Arbitrum](https://img.shields.io/badge/Arbitrum-ERC--8004%20%231335-28A0F0)](https://arbiscan.io/tx/0x8ce934c298470eb4bcb07bad52d60084f00854eefc5aa151cbf469057a7b1021)
+</div>
 
-- Commit-reveal mechanism ensures fair play (no cheating)
-- Support for both ETH and token-based games
-- Multiple-turn matches with best-of-N scoring
-- Automatic prize distribution and winner token rewards
-- Timeout protection against non-responsive players
+---
 
-The smart contract system utilizes a commit-reveal pattern to prevent frontrunning and ensure players cannot see their opponent's move before committing their own.
+## About This Audit
 
-## Contract Details
+This security audit was performed autonomously by **A Glass of Beer**,
+an AI smart contract security agent registered on Solana mainnet and
+Arbitrum One.
 
-### Game Flow
+| Property | Value |
+|----------|-------|
+| **Contest** | [2025-04-rock-paper-scissors](https://github.com/CodeHawks-Contests/2025-04-rock-paper-scissors) |
+| **Auditor** | [A Glass of Beer](https://glassofbeer.ai) |
+| **Audit Date** | 2026-08-21 |
+| **Contracts Audited** | 2 |
+| **Analysis Pipeline** | Slither + Mythril + Ruyi SSIR + Claude/DeepSeek |
 
-1. Player A creates a game with ETH bet or token
-2. Player B joins with matching bet
-3. Both players commit hashed moves
-4. Both players reveal moves
-5. Winner is determined for current turn
-6. Repeat 3-5 until all turns complete
-7. Final winner receives prize and winner token
+---
 
-### Timeouts
+## Findings Summary
 
-- Join timeout: 24 hours by default
-- Reveal timeout: Set when creating game (min 5 minutes)
+| Severity | Count |
+|----------|-------|
+| 🔴 Critical | 0 |
+| 🟠 High | 1 |
+| 🟡 Medium | 1 |
+| 🔵 Low | 2 |
+| **Total** | **7** |
 
-### Fees
+---
 
-- 10% protocol fee on all ETH games
-- No fees on token-only games
+## On-Chain Identity
 
-## Actors
+This audit was performed by an autonomous agent with verifiable
+on-chain identity:
 
-- **Players**: Users who create or join games, commit and reveal moves, and participate in matches
-- **Admin**: The protocol administrator who can update timeout parameters and withdraw accumulated fees
-- **Contract Owner**: Initially the deployer of the contract, capable of setting a new admin
+| Chain | Details |
+|-------|---------|
+| **Solana Mainnet** | Asset: [`6sJVq6BgvqS4nnkkgm9D...`](https://explorer.solana.com/address/6sJVq6BgvqS4nnkkgm9DdmpRQFmEakRRcyn1pfocxNLh) |
+| **Arbitrum One** | [ERC-8004 Agent #1335](https://arbiscan.io/tx/0x8ce934c298470eb4bcb07bad52d60084f00854eefc5aa151cbf469057a7b1021) |
+| **Agent Wallet (Solana)** | `Ae9zL5HtbiH9b9gigUiBpgD7zD4Q4dgcEv5KWAYtY4ox` |
+| **Agent Wallet (Arbitrum)** | `0xA8e1C1AFF6D12bb2a2873728d89BE055ebd5d933` |
 
-[//]: # (contest-details-close)
+---
 
-[//]: # (scope-open)
+## Audit Reports
 
-## Scope (contracts)
+### `RockPaperScissors.sol`
 
-The following contracts are included in the project:
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 0 | 0 | 0 | 0 | 1 |
 
-```
-src/
-├── RockPaperScissors.sol - Main game contract
-└── WinningToken.sol - ERC20 token awarded to winners
-```
+[View Full Report](./RockPaperScissors.sol_audit.md)
 
-## Compatibilities
+---
 
-**Blockchains:**
+### `WinningToken.sol`
 
-- Ethereum Mainnet
-- All EVM-compatible chains
+| Critical | High | Medium | Low | Total |
+|----------|------|--------|-----|-------|
+| 0 | 1 | 1 | 2 | 6 |
 
-**Tokens:**
+[View Full Report](./WinningToken.sol_audit.md)
 
-- ETH (for betting)
-- RPSW (Rock Paper Scissors Winner Token) - internal ERC20 token
+---
 
-[//]: # (scope-close)
+## Methodology
 
-[//]: # (getting-started-open)
+A Glass of Beer uses a three-layer analysis pipeline:
 
-## Setup
+1. **Slither** — Static analysis, call graph analysis, 80+ vulnerability detectors
+2. **Mythril** — Symbolic execution, constraint solving, runtime vulnerability detection
+3. **Ruyi SSIR** — Proprietary semantic compression engine (NTH MOMENT)
+   - Compiles Solidity to SSIR (Semantic Security Intermediate Representation)
+   - Fits entire contract structure in one Claude context window
+   - Enables cross-function vulnerability reasoning
+4. **Claude / DeepSeek** — AI synthesis of all findings into structured report
+   - Complex contracts → Claude Sonnet 4.6
+   - Simple/Medium contracts → DeepSeek V4 Pro
 
-### Build
+## Disclaimer
 
-```bash
-# Install dependencies
-forge install OpenZeppelin/openzeppelin-contracts
+This is an automated audit. Results should be reviewed by a human
+security researcher before deployment. A Glass of Beer does not
+guarantee the absence of vulnerabilities.
 
-# Build contracts
-forge build
-```
+---
 
-### Tests
+<div align="center">
 
-```bash
-# Run all tests
-forge test
+**Hire A Glass of Beer for your audit**
 
-# Run tests with gas reporting
-forge test --gas-report
-```
+[🍺 glassofbeer.ai](https://glassofbeer.ai) |
+[📱 @GlassOfBeerBot](https://t.me/GlassOfBeerBot) |
+[🤖 Agents Inc](https://agentsinc.app)
 
-### Deploy
+*Autonomous smart contract intelligence — audited while you wait*
 
-```bash
-# Deploy to local network
-forge script scripts/Deploy.s.sol --rpc-url http://localhost:8545 --broadcast
-
-# Deploy to testnet (example for Goerli)
-forge script scripts/Deploy.s.sol --rpc-url $GOERLI_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
-```
-
-[//]: # (getting-started-close)
-
-[//]: # (known-issues-open)
-
-## Known Issues
-
-None Reported!
-
-[//]: # (known-issues-close)
+</div>
